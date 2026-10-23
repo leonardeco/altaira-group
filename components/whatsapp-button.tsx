@@ -1,5 +1,5 @@
 import { WhatsAppIcon } from "@/components/icons";
-import { WHATSAPP_NUMBER, WHATSAPP_URL } from "@/lib/site";
+import { WHATSAPP_URL } from "@/lib/site";
 
 type WhatsAppButtonProps = {
   compact?: boolean;
@@ -25,12 +25,11 @@ export function WhatsAppButton({
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Escribir por WhatsApp al ${WHATSAPP_NUMBER}`}
+      aria-label="Escribir por WhatsApp"
     >
-      <span className="btn-icon wa-mark" aria-hidden="true">
+      <span className="btn-icon wa-mark">
         <WhatsAppIcon />
       </span>
-      <span>WhatsApp {WHATSAPP_NUMBER}</span>
     </a>
   );
 }

@@ -1,5 +1,7 @@
 export const WHATSAPP_NUMBER = "318 683 5503";
 
+export const TEL_URL = "tel:+573186835503";
+
 export const WHATSAPP_URL =
   "https://wa.me/573186835503?text=" +
   encodeURIComponent(

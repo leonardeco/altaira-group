@@ -1,9 +1,22 @@
 import Image from "next/image";
 import { Cta } from "@/components/cta";
+import { MailIcon, PhoneIcon } from "@/components/icons";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { Motion } from "@/components/motion";
 import { Nav } from "@/components/nav";
-import { EMAIL, INSTAGRAM_URL, MAILTO_URL, WHATSAPP_NUMBER, WHATSAPP_URL } from "@/lib/site";
+import { EMAIL, INSTAGRAM_URL, MAILTO_URL, TEL_URL, WHATSAPP_NUMBER } from "@/lib/site";
+
+function MailAddress({ email }: { email: string }) {
+  const at = email.indexOf("@");
+  if (at < 0) return <span>{email}</span>;
+  return (
+    <span>
+      {email.slice(0, at + 1)}
+      <wbr />
+      {email.slice(at + 1)}
+    </span>
+  );
+}
 
 const services = [
   {
@@ -134,12 +147,16 @@ export default function HomePage() {
                   Ver servicios
                 </Cta>
               </div>
-              <p className="aside">
-                Escríbenos por mensaje directo al {WHATSAPP_NUMBER}
-                <br />
-                o al correo{" "}
-                <a href={MAILTO_URL}>{EMAIL}</a>
-              </p>
+              <div className="reach">
+                <a href={TEL_URL}>
+                  <PhoneIcon />
+                  <span>{WHATSAPP_NUMBER}</span>
+                </a>
+                <a href={MAILTO_URL}>
+                  <MailIcon />
+                  <MailAddress email={EMAIL} />
+                </a>
+              </div>
             </div>
 
             <div className="hero-mark reveal" style={{ ["--d" as string]: "80ms" }}>
@@ -214,7 +231,7 @@ export default function HomePage() {
                   <span className="num">01</span>
                   <div>
                     <strong>Escríbenos</strong>
-                    <p>Mensaje directo por WhatsApp al {WHATSAPP_NUMBER}.</p>
+                    <p>Por el ícono de WhatsApp o con una llamada.</p>
                   </div>
                 </div>
               </li>
@@ -252,21 +269,19 @@ export default function HomePage() {
                   </p>
                   <div className="hero-actions">
                     <WhatsAppButton />
-                    <Cta href={MAILTO_URL} variant="quiet">
-                      Correo
-                    </Cta>
                     <Cta href={INSTAGRAM_URL} variant="quiet">
                       Instagram
                     </Cta>
                   </div>
                 </div>
                 <div className="contact-meta">
-                  <a className="phone" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-                    {WHATSAPP_NUMBER}
+                  <a className="phone" href={TEL_URL}>
+                    <PhoneIcon />
+                    <span>{WHATSAPP_NUMBER}</span>
                   </a>
-                  <p>WhatsApp · escríbenos por mensaje directo</p>
                   <a className="mail" href={MAILTO_URL}>
-                    {EMAIL}
+                    <MailIcon />
+                    <MailAddress email={EMAIL} />
                   </a>
                   <a className="handle" href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
                     @altairagroupsas
@@ -292,7 +307,8 @@ export default function HomePage() {
             Ingeniería geográfica y ambiental · Especialistas en gestión ambiental
             <br />
             <a className="mail" href={MAILTO_URL}>
-              {EMAIL}
+              <MailIcon />
+              <MailAddress email={EMAIL} />
             </a>
           </p>
           <p className="copy">© {year} Altaira Group</p>
